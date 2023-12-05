@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+ {% block content %}
+
+
+ <!-- <h3>{{ target_user.username }} is following:</h3>
+ <ul>
+ {% for user in following_users %}
+     <li><a href="{% url 'user-Profile' user.id %}">{{ user.username }}</a></li>
+ {% empty %}
+     <li>{{ target_user.username }} is not following anyone.</li>
+ {% endfor %}
+ </ul> -->
+ 
+
+
+
+ <main class="create-room layout">
+    <div class="container">
+        
+      <div class="layout__box">
+        <div class="layout__boxHeader">
+          <div class="layout__boxTitle">
+            <a href="{% url 'user-Profile' target_user.id %}">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <title>arrow-left</title>
+                <path
+                  d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
+                ></path>
+              </svg>
+            </a>
+            <h3>Browse {{blah}}</h3>
+          </div>
+        </div>
+
+        <div class="topics-page layout__body">
+        
+
+          <ul class="topics__list">
+            <li>
+              <a href="{{ request.path }}"class="active">All <span></span></a>
+            </li>
+            {% for user in obj %}
+            <li>
+                <a href="{% url 'user-Profile' user.id %}" class="author-com">
+                    <div class="avatar avatar--small">
+                      <img src="{{user.profile.profile_image.url}}" />
+                    </div>
+                    <span class = "ats" >@{{user.username}}</span>
+                    </a>
+              
+            </li>
+            {% endfor %}
+         
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock content %}
+

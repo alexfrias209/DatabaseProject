@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<main class="profile-page layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    <div>{% include 'logic/topics.html' %}</div>
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="profile">
+        <div class="avi_profile">
+          <div class="avatar avatar--large active">
+            <img src="{{user.profile.profile_image.url }}" />
+          </div>
+        </div>
+        <div class="avi_info">
+          <h3>{{user.profile.name}}</h3>
+          <p>@{{user.username}}</p>
+          {% if request.user == user %}
+          <a href="{% url 'edit-Profile'%}" class="btn btn--main btn--pill">Edit Profile</a>
+          {% endif %}
+
+          {% if user != request.user %}
+          {% if user in request.user.profile.following.all %}
+  <a href="{% url 'unfollow' user.id %}" class="btn btn--main btn--pill">Unfollow</a>
+{% else %}
+  <a href="{% url 'follow' user.id %}" class="btn btn--main btn--pill">Follow</a>
+{% endif %}
+          {% endif %}
+          <div class="follow">
+            <a href="{% url 'followlist' user.id %}" class = "follow" >following {{user.profile.following.count}}</a>
+            <a href="{% url 'unfollowlist' user.id%}" class = "follow" >followers {{ user.profile.followers_count }}
+            </a>
+          </div>
+         
+        </div>
+        
+        <div class="avi_about">
+         
+          
+          <h3>About</h3>
+          <p style="color:#7a7c80">
+            {{user.profile.bio}}
+          </p>
+        </div>
+        
+      </div>
+
+      <div class="header_list">
+        <h2>Posts by {{user.username}} </h2>
+        <a href="{% url 'user-Profile' user.pk %}">
+            <button class="btn btn--main btn--pill2">Posted Polls</button>
+        </a>
+    </div>
+      
+      {% include 'logic/blah.html' %}
+
+    </div>
+
+    {% include 'logic/activity.html' %}
+  </div>
+</main>
+{% endblock content %}
+
+
